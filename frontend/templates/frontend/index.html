@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>OurApp</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700,700i&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/frontend/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/frontend/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/frontend/img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/frontend/img/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/static/frontend/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Fontawesome -->
+  <link type="text/css" href="/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/docs.css" />
+</head>
+
+<body>
+  <div id="app"></div>
+
+
+  <script src="/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/vendor/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+  <script src="/vendor/headroom.js/dist/headroom.min.js"></script>
+
+  <!-- Vendor JS -->
+  <script src="/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+  <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script src="/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
+  <script src="/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+  <script src="/vendor/nouislider/distribute/nouislider.min.js"></script>
+  <script src="/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+  <script src="/vendor/jarallax/dist/jarallax.min.js"></script>
+  <script src="/vendor/jquery.counterup/jquery.counterup.min.js"></script>
+  <script src="/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
+  <script src="/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  <script src="/vendor/prismjs/prism.js"></script>
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <!-- Neumorphism JS -->
+  <script src="/static/frontend/js/docs.min.js"></script>
+  <script src="/static/frontend/js/pixel.js"></script>
+  <script src="/static/frontend/js/neumorphism.js"></script>
+  <script src="/bundled.js"></script>
+  <script>
+    $toggleTransitions = $('#toggleTransitions');
+    $buttonOverlay = $('.btn-loading-overlay');
+
+    $toggleTransitions.on('change', function () {
+      if ($(this).is(':checked')) {
+        $buttonOverlay.addClass('btn-loading');
+        $buttonOverlay.attr('disabled', true);
+      } else {
+        $buttonOverlay.removeClass('btn-loading');
+        $buttonOverlay.attr('disabled', false);
+      }
+    });
+  </script>
+</body>
+
+</html>

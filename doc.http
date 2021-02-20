@@ -1,0 +1,191 @@
+@hostname = http://127.0.0.1
+@port = 8000
+@host = {{hostname}}:{{port}}
+@baseUrl = {{host}}
+@contentType = application/json
+
+###
+
+GET {{baseUrl}}/api/hello/ HTTP/1.1
+content-type: {{contentType}}
+
+### DRF default token authentication
+
+# @name authLogin
+POST {{baseUrl}}/api-token-auth/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+###
+
+@authToken = {{authLogin.response.body.token}}
+
+###
+# @name login
+POST {{baseUrl}}/accounts/token/obtain/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+###
+
+POST {{baseUrl}}/accounts/user/create/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "first_name": "Nicole",
+  "last_name": "Norton",
+  "email": "nicole.norto@email.com",
+  "username": "nicole.norto",
+  "password": "12a3456789",
+  "password2": "12a3456789"
+}
+
+###
+
+@refreshToken = {{login.response.body.refresh}}
+
+### 
+
+# @name refreshAccess
+POST {{baseUrl}}/accounts/token/refresh/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "refresh": "{{refreshToken}}"
+}
+
+###
+
+@accessToken = {{refreshAccess.response.body.access}}
+
+### verify access token
+POST {{baseUrl}}/accounts/token/verify/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "token": "{{refreshToken}}"
+}
+
+###
+POST {{baseUrl}}/accounts/blacklist/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "token": "{{refreshToken}}"
+}
+
+###
+
+
+POST {{baseUrl}}/accounts/restore-password/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "email": "username@email.com"
+}
+
+###
+
+GET {{baseUrl}}/api/hello/?a=asdf HTTP/1.1
+Authorization: Bearer {{accessToken}}
+
+###
+POST {{baseUrl}}/accounts/restore/Mjg/ahwy97-cb3ad9f401337c06b8bcd6b54cb161dc/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "password": "UsernamePassword",
+  "password2": "UsernamePassword"
+}
+
+###
+
+POST {{baseUrl}}/accounts/change/password/ HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+
+{
+  "password": "12a3456789",
+  "password2": "12a3456789",
+  "old_password": "12a3456789"
+}
+
+###
+
+POST {{baseUrl}}/accounts/resend-activation-code/ HTTP/1.1
+content-type: {{contentType}}
+# Authorization: token {{authToken}}
+
+{
+  "email": "admin@domain.com"
+}
+
+###
+
+GET {{baseUrl}}/accounts/activate/VkI37JccQqponoTeASiF/ HTTP/1.1
+content-type: {{contentType}}
+
+
+
+
+### Default Authtentication access
+GET {{authLogin.response.body.token}} HTTP/1.1
+content-type: {{contentType}}
+
+###
+GET {{baseUrl}}/api/blogs/ HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+# Authorization: Bearer {{accessToken}}
+
+###
+GET {{baseUrl}}/api/blog/coach-wonder-yeah-sense-shubham HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+# Authorization: Bearer {{accessToken}}
+
+###
+
+POST {{baseUrl}}/api/follow-unfollow-speaker/26/ HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+
+###
+GET {{baseUrl}}/api/speakers/ HTTP/1.1
+content-type: {{contentType}}
+# Authorization: token {{authToken}}
+
+###
+GET {{baseUrl}}/api/speaker/26 HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+###
+GET {{baseUrl}}/api/webinars/ HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+###
+GET {{baseUrl}}/api/webinar/ HTTP/1.1
+content-type: {{contentType}}
+Authorization: token {{authToken}}
+###
+GET {{baseUrl}}/api/specialities/ HTTP/1.1
+content-type: {{contentType}}
+###
+GET {{baseUrl}}/api/webinar-series/ HTTP/1.1
+content-type: {{contentType}}
+###
+GET {{baseUrl}}/api/webinar-series/question-trouble-poor-over-18-02-2021-063432/ HTTP/1.1
+content-type: {{contentType}}
+###
+POST {{baseUrl}}/api/webinar-series-play/ HTTP/1.1
+content-type: {{contentType}}
+
+{"series_id" :13, "webinar_id":79}
+###
