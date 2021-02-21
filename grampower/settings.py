@@ -216,7 +216,7 @@ if DEBUG:
     }
 
 else:
-    ALLOWED_HOSTS = ['www.domain.com']
+    ALLOWED_HOSTS = ['grampower-test.herokuapp.com']
 
     # Change with your domain name
     CSRF_COOKIE_SECURE = True
@@ -320,9 +320,9 @@ REST_FRAMEWORK = {
 }
 
 DEV_URL_LIST = ['http://localhost:3000']
-PRODUCTION_URL_LIST = ['http://www.dowmain.com']
+PRODUCTION_URL_LIST = ['https://grampower-test.herokuapp.com']
 
-# CORS_ALLOWED_ORIGINS = DEV_URL_LIST if DEBUG else PRODUCTION_URL_LIST  # list of domains
+CORS_ALLOWED_ORIGINS = DEV_URL_LIST if DEBUG else PRODUCTION_URL_LIST  # list of domains
 # CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT',] #change if required
 CORS_ORIGIN_ALLOW_ALL = True if DEBUG else False
 

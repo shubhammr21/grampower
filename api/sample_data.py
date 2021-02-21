@@ -72,4 +72,4 @@ class SampleData():
                     close_time=fake.time()
                 )
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
-        print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
+        print(f'Total time took {time.time() - starttime} seconds to create {} Data')

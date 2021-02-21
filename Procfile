@@ -1,0 +1,1 @@
+web: gunicorn grampower.wsgi --log-file -
