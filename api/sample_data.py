@@ -21,7 +21,7 @@ class SampleData():
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
 
-    def inser_store(self, count):
+    def insert_store(self, count):
         starttime = time.time()
         user = User.objects.all().values_list('id', flat=True)
         for _ in range(0, count):
@@ -38,7 +38,7 @@ class SampleData():
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
 
-    def inser_products(self, count):
+    def insert_products(self, count):
         starttime = time.time()
         store = Store.objects.all().values_list('id', flat=True)
         for _ in range(0, count):
@@ -49,7 +49,7 @@ class SampleData():
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
 
-    def inser_photo(self, count):
+    def insert_photo(self, count):
         starttime = time.time()
         store = Store.objects.all().values_list('id', flat=True)
         for _ in range(0, count):
@@ -60,7 +60,7 @@ class SampleData():
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
 
-    def inser_store_hour(self):
+    def insert_store_hour(self):
         starttime = time.time()
         stores = Store.objects.all().values_list('id', flat=True)
         for store in stores:

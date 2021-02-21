@@ -15,14 +15,15 @@ _1._ Run this commands to start the project
 - sample = SampleData()
   \*\* mention the count of data
 - insert_user(count):
-- inser_store(count):
-- inser_products(count):
-- inser_photo(count):
-- inser_store_hour():
+- insert_store(count):
+- insert_products(count):
+- insert_photo(count):
+- insert_store_hour():
 
 _2._ Run this commands to start frontend
-npm install
-npm run dev
+
+- npm install
+- npm run dev
 
 ### env
 
