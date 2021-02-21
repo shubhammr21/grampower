@@ -36,6 +36,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'versatileimagefield'
 ]
 
 LOCAL_APPS = [

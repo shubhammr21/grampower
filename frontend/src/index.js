@@ -1,98 +1,67 @@
-import React, { useEffect, lazy, Suspense } from "react"
+import React, { useEffect, Suspense } from "react"
 import { render } from "react-dom"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
-// import App from './components/App';
-//My Components
-import Header from "./components/Header"
-import HomeGuest from "./components/HomeGuest"
-import Home from "./components/Home"
+import Header from "./pages/Header"
+import Home from "./pages/Home"
 import Footer from "./components/Footer"
-// import About from "./components/About"
-import Terms from "./components/Terms"
-// const Home = lazy(() => import("./components/Home"))
 import FlashMessages from "./components/FlashMessages"
 import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
 import NotFound from "./components/NotFound"
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
-import Axios from "./Axios"
 import { useImmerReducer } from "use-immer"
+import Store from "./pages/Store"
 
 function Index() {
   const initalState = {
-    loggedIn: Boolean(localStorage.getItem("refresh_token")),
+    loggedIn: Boolean(localStorage.getItem("token")),
     flashMessages: [],
     user: {
-      access_token: localStorage.getItem("access_token"),
-      refresh_token: localStorage.getItem("refresh_token")
+      userId: localStorage.getItem("userId"),
+      username: localStorage.getItem("username"),
+      email: localStorage.getItem("email"),
+      token: localStorage.getItem("token")
     }
   }
   function ourReducer(draft, action) {
     switch (action.type) {
       case "login":
         draft.loggedIn = true
-        draft.user = action.data
-        login()
         return
       case "logout":
         draft.loggedIn = false
-        logout()
         return
       case "flashMessage":
-        draft.flashMessages.push(action.value)
+        draft.flashMessages.push({ msg: action.value, level: action.level })
         return
     }
   }
 
   const [state, dispatch] = useImmerReducer(ourReducer, initalState)
-  function login() {
-    Axios.defaults.headers["Authorization"] = "Bearer " + state.user.access
-    localStorage.setItem("access_token", state.user.access)
-    localStorage.setItem("refresh_token", state.user.refresh)
-  }
-  function logout() {
-    Axios.post("accounts/blacklist/", {
-      refresh_token: localStorage.getItem("refresh_token")
-    })
-      .then(() => {
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-        Axios.defaults.headers["Authorization"] = null
-      })
-      .catch(error => {
-        console.log(error.response)
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-        Axios.defaults.headers["Authorization"] = null
-      })
-  }
 
-  /* useEffect(() => {
-    if (state.loggedIn) {
-      async function fetchResults() {
-        try {
-          const response = await Axios.post("/checkToken", { token: state.user.token }, { cancelToken: ourRequest.token })
-          if (!response.data) {
-            dispatch({ type: "logout" })
-            dispatch({ type: "flashMessage", value: "Your session has expired" })
-          }
-        } catch (e) {
-          console.log("There was a problem or the request was cancelled.")
-        }
-      }
-      fetchResults()
+  useEffect(() => {
+    if (!state.loggedIn) {
+      console.log("in logout section")
+      localStorage.removeItem("username", state.user.username)
+      localStorage.removeItem("email", state.user.email)
+      localStorage.removeItem("userId", state.user.pk)
+      localStorage.removeItem("token")
     }
-  }, [state.requestCount])
- */
+  }, [state.loggedIn])
+
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
           <FlashMessages messages={state.flashMessages} />
+          <Header />
           <Suspense fallback={<LoadingDotsIcon />}>
             <Switch>
               <Route path="/" exact>
-                <About />
+                <Home />
+              </Route>
+              <Route path="/store/:id" exact>
+                <Store />
               </Route>
               <Route>
                 <NotFound />
@@ -100,11 +69,10 @@ function Index() {
             </Switch>
           </Suspense>
           <Footer />
-          <Theme />
         </BrowserRouter>
       </DispatchContext.Provider>
     </StateContext.Provider>
   )
 }
 
-render(<Index />, document.getElementById("root"))
+render(<Index />, document.getElementById("app"))

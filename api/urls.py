@@ -9,4 +9,7 @@ from .views import *
 
 urlpatterns = [
     path('hello/', HelloWorldView.as_view()),
+    path('stores/', StoreListView.as_view()),
+    path('store/<id>/', StoreDetailView.as_view()),
+    path('store/create/', StoreCreateView.as_view()),
 ]

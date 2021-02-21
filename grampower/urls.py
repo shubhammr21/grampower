@@ -14,8 +14,8 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('docs/api/', include_docs_urls(title="Gram Power Technical Test")),
     # path('accounts/', include('accounts.urls')),
-    path('accounts/', include('dj_rest_auth.urls')),
-    path('accounts/registration/', include('dj_rest_auth.registration.urls'))
+    path('account/', include('dj_rest_auth.urls')),
+    path('account/registration/', include('dj_rest_auth.registration.urls'))
 ]
 
 if ('drf_yasg' in settings.INSTALLED_APPS):
@@ -64,4 +64,4 @@ if ('anymail' in settings.INSTALLED_APPS):
     ]
 
 # Frontend (React)
-# urlpatterns += [re_path(r'(?P<path>.*)', index)]  # for the empty url
+urlpatterns += [re_path(r'(?P<path>.*)', index)]  # for the empty url

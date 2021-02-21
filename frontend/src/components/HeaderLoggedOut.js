@@ -1,47 +1,44 @@
 import React, { useEffect, useState, useContext } from "react"
-import Axios from "axios"
+import { Link } from "react-router-dom"
+import { Button, Modal } from "react-bootstrap"
 import DispatchContext from "../DispatchContext"
+import Login from "../pages/Login"
+import Register from "../pages/Register"
 
 function HeaderLoggedOut(props) {
+  const [loginShow, setLoginShow] = useState(false)
+  const handleCloseLogin = () => setLoginShow(false)
+  const handleShowLogin = () => setLoginShow(true)
+
+  const [registerShow, setRegisterShow] = useState(false)
+  const handleCloseRegister = () => setRegisterShow(false)
+  const handleShowRegiseter = () => setRegisterShow(true)
+
   const appDispatch = useContext(DispatchContext)
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-    try {
-      const response = await Axios.post("/login", { username, password })
-      if (response.data) {
-        /*
-        localStorage.setItem("appToken", response.data.token)
-        localStorage.setItem("appUsername", response.data.username)
-        localStorage.setItem("appAvatar", response.data.avatar)
-        */
-        appDispatch({ type: "login", data: response.data })
-        appDispatch({ type: "flashMessage", value: "You have successfully logged in." })
-      } else {
-        appDispatch({ type: "flashMessage", value: "Incorrect username/password." })
-      }
-    } catch (e) {
-      console.log("There was a problem.")
-    }
-  }
-
   return (
     <>
-      <form onSubmit={handleSubmit} className="mb-0 pt-2 pt-md-0">
-        <div className="row align-items-center">
-          <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input onChange={e => setUsername(e.target.value)} name="username" className="form-control form-control-sm input-dark" type="text" placeholder="Username" autoComplete="off" />
-          </div>
-          <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input onChange={e => setPassword(e.target.value)} name="password" className="form-control form-control-sm input-dark" type="password" placeholder="Password" />
-          </div>
-          <div className="col-md-auto">
-            <button className="btn btn-success btn-sm">Sign In</button>
-          </div>
-        </div>
-      </form>
+      <Button onClick={handleShowRegiseter} className="btn btn-primary text-secondary mr-3">
+        <i className="fas fa-user-plus mr-2"></i> Register
+      </Button>
+      <Button onClick={handleShowLogin} className="btn btn-primary text-secondary mr-3">
+        <i className="fas fa-sign-in-alt mr-2"></i> Login
+      </Button>
+      <Modal show={loginShow} onHide={handleCloseLogin} backdrop="static" keyboard={false}>
+        <Modal.Header closeButton>
+          <h2 className="h4">Sign in to our platform</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <Login />
+        </Modal.Body>
+      </Modal>
+      <Modal size="lg" show={registerShow} onHide={handleCloseRegister} backdrop="static" keyboard={false}>
+        <Modal.Header closeButton>
+          <h2 className="mb-0 h5">Create Account</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <Register />
+        </Modal.Body>
+      </Modal>
     </>
   )
 }

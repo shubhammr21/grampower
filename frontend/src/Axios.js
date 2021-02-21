@@ -2,16 +2,16 @@
 
 import axios from "axios"
 
-const baseURL = "http://192.168.0.240:8000/" // "http://127.0.0.1:8000/"
+const baseURL = /* "http://127.0.0.1:8000/" */ "http://192.168.43.91:8000/"
 
-const getAccessToken = localStorage.getItem("access_token")
+// const getToken = localStorage.getItem("token")
 
 const Axios = axios.create({
   baseURL: baseURL,
   timeout: 5000,
 
   headers: {
-    Authorization: getAccessToken && getAccessToken !== "undefined" ? "Bearer " + localStorage.getItem("access_token") : null,
+    // Authorization: Boolean(getToken) ? "token " + localStorage.getItem("token") : null,
     "Content-Type": "application/json",
     accept: "application/json"
   }
