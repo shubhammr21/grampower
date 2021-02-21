@@ -5,10 +5,10 @@ import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', default="v%ds=-6r2*x$9-2$bf*1bv)!7$r7*3%ck+ao71$(j^xhid2d1(")
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
