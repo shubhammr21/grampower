@@ -2,9 +2,6 @@ from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
 import logging
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.logging import LoggingIntegration
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -219,9 +216,6 @@ if DEBUG:
     }
 
 else:
-    INSTALLED_APPS += [
-        "anymail"
-    ]
     ALLOWED_HOSTS = ['www.domain.com']
 
     # Change with your domain name
@@ -243,19 +237,6 @@ else:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }
-    EMAIL_BACKEND = 'anymail.backends.sendgrid.EmailBackend'
-    DEFAULT_FROM_EMAIL = config(
-        'DJANGO_DEFAULT_FROM_EMAIL', default='Basic Project <noreply@example.com>')
-    SERVER_EMAIL = config("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
-    EMAIL_SUBJECT_PREFIX = config(
-        "DJANGO_EMAIL_SUBJECT_PREFIX", default="[My Awesome Project]"
-    )
-    ANYMAIL = {
-        "SENDGRID_API_KEY": config("SENDGRID_API_KEY"),
-        "SENDGRID_GENERATE_MESSAGE_ID": config("SENDGRID_GENERATE_MESSAGE_ID"),
-        "SENDGRID_MERGE_FIELD_FORMAT": config("SENDGRID_MERGE_FIELD_FORMAT"),
-        "SENDGRID_API_URL": config("SENDGRID_API_URL", default="https://api.sendgrid.com/v3/"),
     }
 
     LOGGING = {
@@ -290,35 +271,7 @@ else:
             },
         },
     }
-    # Sentry
-    # ------------------------------------------------------------------------------
-    SENTRY_DSN = config("SENTRY_DSN")
-    SENTRY_LOG_LEVEL = config(
-        "DJANGO_SENTRY_LOG_LEVEL", logging.INFO, cast=int)
 
-    sentry_logging = LoggingIntegration(
-        level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
-        event_level=logging.ERROR,  # Send errors as events
-    )
-    integrations = [
-        sentry_logging,
-        DjangoIntegration(),
-    ]
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        integrations=integrations,
-        environment=config("SENTRY_ENVIRONMENT", default="production"),
-        traces_sample_rate=config(
-            "SENTRY_TRACES_SAMPLE_RATE",
-            default=0.0, cast=float
-        ),
-    )
-
-
-'''
-# Other Django Configurations
-# Uncomment all the settings below
-'''
 # drf-yasg
 SWAGGER_SETTINGS = {
     'LOGIN_URL': reverse_lazy('admin:login'),
@@ -399,48 +352,3 @@ ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 180  # in  seconds
 
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        # 'skin': 'moono',
-        # 'skin': 'office2013',
-        'toolbar_Basic': [
-            ['Source', '-', 'Bold', 'Italic']
-        ],
-        'toolbar_YourCustomToolbarConfig': [
-            {'name': 'basicstyles', 'items': [
-                'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
-            {'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
-                                            '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
-            {'name': 'insert', 'items': [
-                'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak']},
-            {'name': 'styles', 'items': [
-                'Styles', 'Format', 'Font', 'FontSize']},
-            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-            {'name': 'document', 'items': ['-', 'Source']},
-        ],
-        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        'height': 291,
-        'width': '100%',
-        'tabSpaces': 4,
-        'extraPlugins': ','.join([
-            'uploadimage',  # the upload image feature
-            # your extra plugins here
-            'div',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
-        ]),
-    }
-}
