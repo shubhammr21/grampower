@@ -10,7 +10,6 @@ _1._ Run this commands to start the project
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py makesuper
-- python manage.py runserver
 
 ### To load sample data please follow these instruction given below:
 
@@ -18,11 +17,19 @@ _1._ Run this commands to start the project
 - from api.sample_data import \*
 - sample = SampleData()
   \*\* mention the count of data
-- insert_user(count):
-- insert_store(count):
-- insert_products(count):
-- insert_photo(count):
+- insert_user(20):
+- insert_store(200):
+- insert_products(2000):
+- insert_photo(3000):
 - insert_store_hour():
+
+- python manage.py runserver
+
+### Admin Login
+
+Goto [http://120.0.0.1:8000/admin/]
+
+    ** login with 'admin' username and password
 
 _2._ Run this commands to start frontend
 
