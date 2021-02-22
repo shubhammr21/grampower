@@ -11,6 +11,7 @@ import NotFound from "./components/NotFound"
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import { useImmerReducer } from "use-immer"
 import Store from "./pages/Store"
+import CreateStore from "./pages/CreateStore"
 
 function Index() {
   const initalState = {
@@ -62,6 +63,9 @@ function Index() {
               </Route>
               <Route path="/store/:id" exact>
                 <Store />
+              </Route>
+              <Route path="/create" exact>
+                <CreateStore />
               </Route>
               <Route>
                 <NotFound />

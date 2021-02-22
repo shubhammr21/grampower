@@ -30,9 +30,11 @@ function Header(props) {
                 </div>
               </div>
               <ul className="navbar-nav navbar-nav-hover align-items-lg-center">
-                <li className="nav-item">{/* <Link to={"/stores"} className="nav-link">
-                    <span className="nav-link-inner-text">Stores</span>
-                  </Link> */}</li>
+                <li className="nav-item">
+                  <Link to={"/create"} className="nav-link">
+                    <span className="nav-link-inner-text">Create Store</span>
+                  </Link>
+                </li>
 
                 <li className="nav-item dropdown">
                   <a href="#" className="nav-link" data-toggle="dropdown">
