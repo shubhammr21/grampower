@@ -17,11 +17,11 @@ _1._ Run this commands to start the project
 - from api.sample_data import \*
 - sample = SampleData()
   \*\* mention the count of data
-- insert_user(20):
-- insert_store(200):
-- insert_products(2000):
-- insert_photo(3000):
-- insert_store_hour():
+- sample.insert_user(20)
+- sample.insert_store(200)
+- sample.insert_products(2000)
+- sample.insert_photo(3000)
+- sample.insert_store_hour()
 
 - python manage.py runserver
 
