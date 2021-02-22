@@ -2,7 +2,7 @@
 
 import axios from "axios"
 
-const baseURL = "https://grampower-test.herokuapp.com/" /* "http://192.168.43.91:8000/" */
+const baseURL = "https://grammpower.herokuapp.com/" /* "http://192.168.43.91:8000/" */
 
 const Axios = axios.create({
   baseURL: baseURL,
