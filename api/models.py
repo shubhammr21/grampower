@@ -88,7 +88,7 @@ class Photo(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.store__name
+        return self.store.name
 
 """ Signals Here """
 
