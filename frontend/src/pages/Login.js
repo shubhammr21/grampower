@@ -43,7 +43,7 @@ function Login() {
           // fetchUserData()
         })
         .catch(error => {
-          console.log(error.response)
+          appDispatch({ type: "flashMessage", level: "danger", value: error.response.data.non_field_errors[0] })
         })
     } catch (e) {
       console.log("There was a problem.")
@@ -111,14 +111,6 @@ function Login() {
                     <span aria-hidden="true" className="fab fa-github"></span>
                   </button>
                 </div> */}
-        <div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
-          <span className="font-weight-normal">
-            Not registered?
-            <Link to={"/register"} className="font-weight-bold">
-              Create account
-            </Link>
-          </span>
-        </div>
       </div>
     </>
   )

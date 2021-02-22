@@ -25,6 +25,7 @@ function Home() {
   return (
     <>
       <Page title="Home">
+        <h1 className="display-2 mb-3">Available Stores</h1>
         <div className="row">
           {stores.map((store, index) => {
             if (stores.length === index + 1) {

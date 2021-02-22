@@ -2,11 +2,7 @@ from api.serializers import *
 from api.models import *
 from api.filters import *
 from api.paginations import StandardResultsPagination
-from django.shortcuts import render, get_object_or_404
-from django.db.models.query import prefetch_related_objects
-from django.db.models import Prefetch
-from django_filters.rest_framework import DjangoFilterBackend
-from django.http import HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
 from rest_framework import (
     generics,
     mixins,
@@ -14,8 +10,6 @@ from rest_framework import (
     viewsets
 )
 from rest_framework.authentication import (
-    SessionAuthentication,
-    BasicAuthentication,
     TokenAuthentication
 )
 from rest_framework.decorators import api_view, permission_classes
@@ -48,28 +42,29 @@ class HelloWorldView(APIView):
         return Response(data={"hello": "world"}, status=status.HTTP_200_OK)
 
 
-class StoreCreateView(generics.CreateAPIView):
+class StoreCreateView(APIView):
     """
     Create a store from here
     """
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
-    serializer_class = StoreCreateSerializer
+    authentication_classes = (TokenAuthentication,)
+    # serializer_class = StoreCreateSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    # def create(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     self.perform_create(serializer)
+    #     headers = self.get_success_headers(serializer.data)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    # def post(self, request):
-    #     serializer = StoreDetailSerializer(data=request.data)
+    def post(self, request):
+        serializer = StoreDetailSerializer(data=request.data)
 
-    #     if serializer.is_valid():
-    #         serializer.save(owner=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            serializer.save(owner=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StoreListView(generics.ListAPIView):

@@ -41,7 +41,8 @@ function Store(props) {
   return (
     <>
       <Page title={store.name}>
-        {/* style={{ backgroundImage: `url(${store.cover})` }} */}
+        <h1 className=" mb-3">{store.name}</h1>
+
         <div className="card bg-primary border-light shadow-soft mb-5">
           <div className="card-header p-3">
             <img src={store.cover} className="card-img-top rounded" alt={store.name} />
@@ -60,8 +61,7 @@ function Store(props) {
                 </span>
               </div>
             </div>
-            <h3 className="h5 card-title mt-4">{store.name}</h3>
-            <p className="card-text">{store.about}</p>
+            <p className="card-text mt-4">{store.about}</p>
           </div>
         </div>
         <div className="card bg-primary shadow-inset border-light mb-5 ">

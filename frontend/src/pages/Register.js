@@ -83,17 +83,6 @@ function Register() {
           </div>
           <button className="btn btn-block btn-primary">Sign in</button>
         </form>
-        <div className="mt-3 mb-4 text-center">
-          <span className="font-weight-normal">or</span>
-        </div>
-        <div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
-          <span className="font-weight-normal">
-            Already have an account?
-            <Link to={"/login"} className="font-weight-bold">
-              Login here
-            </Link>
-          </span>
-        </div>
       </div>
     </>
   )

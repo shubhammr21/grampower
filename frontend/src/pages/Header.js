@@ -36,7 +36,7 @@ function Header(props) {
                   </Link>
                 </li>
 
-                <li className="nav-item dropdown">
+                {/* <li className="nav-item dropdown">
                   <a href="#" className="nav-link" data-toggle="dropdown">
                     <span className="nav-link-inner-text">Support</span>
                     <span className="fas fa-angle-down nav-link-arrow ml-2"></span>
@@ -67,7 +67,7 @@ function Header(props) {
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="d-flex align-items-center">
