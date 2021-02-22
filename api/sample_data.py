@@ -25,16 +25,16 @@ class SampleData():
         starttime = time.time()
         user = User.objects.all().values_list('id', flat=True)
         for _ in range(0, count):
-            blog = Store.objects.create(
+            store = Store.objects.create(
                 owner_id=fake.word(ext_word_list=user),
                 name=fake.sentence(),
-                cover='cover/image-1.jpg',
+                cover=f'cover/({randint(1, 6)}).jpg',
                 about=fake.paragraph(nb_sentences=10),
                 latitude=fake.latitude(),
                 longitude=fake.longitude(),
             )
-            blog.timestamp = fake.date_time_between(start_date='-1y', end_date='now', tzinfo=None)
-            blog.save()
+            store.timestamp = fake.date_time_between(start_date='-1y', end_date='now', tzinfo=None)
+            store.save()
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
 
@@ -55,7 +55,7 @@ class SampleData():
         for _ in range(0, count):
             Photo.objects.create(
                 store_id=fake.word(ext_word_list=store),
-                image='photos/blog-article-1.jpg'
+                image=f'photos/{randint(1, 34)}.jpg'
             )
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
         print(f'Total time took {time.time() - starttime} seconds to create {count} Data')
@@ -72,4 +72,4 @@ class SampleData():
                     close_time=fake.time()
                 )
             print(f'Obj took {time.time() - starttime} seconds to create {_} Data')
-        print(f'Total time took {time.time() - starttime} seconds to create {} Data')
+        print(f'Total time took {time.time() - starttime} seconds to create Data')
