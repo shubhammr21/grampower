@@ -1,3 +1,4 @@
+import dj_database_url
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
@@ -119,6 +120,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'static'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -171,6 +174,8 @@ if DEBUG:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    db_from_env = dj_database_url.config(conn_max_age=600)
+    DATABASES['default'].update(db_from_env)
 
     LOGGING = {
         "version": 1,
@@ -329,7 +334,9 @@ PRODUCTION_URL_LIST = ['https://grammpower.herokuapp.com', 'http://localhost:300
 
 # CORS_ALLOWED_ORIGINS = DEV_URL_LIST if DEBUG else PRODUCTION_URL_LIST  # list of domains
 # CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT',] #change if required
-CORS_ORIGIN_ALLOW_ALL = True # if DEBUG else False
+
+# if DEBUG else False
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_REPLACE_HTTPS_REFERER = True
 
