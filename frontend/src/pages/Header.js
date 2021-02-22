@@ -2,10 +2,16 @@ import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import HeaderLoggedIn from "../components/HeaderLoggedIn"
 import HeaderLoggedOut from "../components/HeaderLoggedOut"
+import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 
 function Header(props) {
   const appState = useContext(StateContext)
+  const appDispatch = useContext(DispatchContext)
+  function handlePop(e) {
+    e.preventdefault()
+    appDispatch({ type: "flashMessage", level: "danger", value: `Please Login to create` })
+  }
 
   return (
     <>
@@ -31,9 +37,13 @@ function Header(props) {
               </div>
               <ul className="navbar-nav navbar-nav-hover align-items-lg-center">
                 <li className="nav-item">
-                  <Link to={"/create"} className="nav-link">
-                    <span className="nav-link-inner-text">Create Store</span>
-                  </Link>
+                  {appState.loggedIn ? (
+                    <Link to={"/create"} className="nav-link disabled-link">
+                      <span className="nav-link-inner-text">Create Store</span>
+                    </Link>
+                  ) : (
+                    <span className="nav-link-inner-text">Login to create your store</span>
+                  )}
                 </li>
 
                 {/* <li className="nav-item dropdown">

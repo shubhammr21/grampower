@@ -1,3 +1,7 @@
+# About
+
+This project created using Django, Django RestFrameworkm and React
+
 # Instruction
 
 _1._ Run this commands to start the project
@@ -27,7 +31,7 @@ _2._ Run this commands to start frontend
 
 ### env
 
-    **Create this .env file.
+    ** Create this .env file.
 
 DEBUG=True
 

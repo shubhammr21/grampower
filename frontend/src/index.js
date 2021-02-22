@@ -64,9 +64,13 @@ function Index() {
               <Route path="/store/:id" exact>
                 <Store />
               </Route>
-              <Route path="/create" exact>
-                <CreateStore />
-              </Route>
+              {state.loggedIn ? (
+                <Route path="/create" exact>
+                  <CreateStore />
+                </Route>
+              ) : (
+                ""
+              )}
               <Route>
                 <NotFound />
               </Route>
