@@ -21,7 +21,7 @@ function CreateStore(props) {
     formData.append("about", about)
     e.preventDefault()
     try {
-      await Axios.post("/api/stor/create/", formData, {
+      await Axios.post("/api/create/store/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `token ${appState.user.token}`
