@@ -28,7 +28,7 @@ class SampleData():
             store = Store.objects.create(
                 owner_id=fake.word(ext_word_list=user),
                 name=fake.sentence(),
-                cover=f'cover/({randint(1, 6)}).jpg',
+                cover=f'cover/{randint(1, 6)}.jpg',
                 about=fake.paragraph(nb_sentences=10),
                 latitude=fake.latitude(),
                 longitude=fake.longitude(),
