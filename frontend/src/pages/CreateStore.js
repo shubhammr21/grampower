@@ -12,7 +12,6 @@ function CreateStore(props) {
   const appState = useContext(StateContext)
   const acceptedTypes = ["image/png", "image/jpg", "image/jpeg"]
 
-  console.log(name, cover, about)
   async function handleSubmit(e) {
     console.log("clicked")
     const formData = new FormData()
