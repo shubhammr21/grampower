@@ -1,18 +1,12 @@
-from api.serializers import *
-from api.models import *
 from api.filters import *
+from api.models import *
+from api.utils import SampleData
+from api.serializers import *
 from api.paginations import StandardResultsPagination
-from django.utils.decorators import method_decorator
 from rest_framework import (
     generics,
-    mixins,
     status,
-    viewsets
 )
-from rest_framework.authentication import (
-    TokenAuthentication
-)
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.parsers import (
     FormParser, JSONParser,
@@ -21,8 +15,6 @@ from rest_framework.parsers import (
 )
 from rest_framework.permissions import (
     AllowAny, IsAuthenticated,
-    BasePermission,
-    IsAuthenticatedOrReadOnly,
     IsAdminUser
 )
 from rest_framework.response import Response
@@ -112,3 +104,16 @@ class StoreDetailView(generics.RetrieveAPIView):
     queryset = Store.objects.all() \
         .select_related('owner')
     serializer_class = StoreDetailSerializer
+
+
+class SampleDataLoadView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def post(self, request):
+        sample = SampleData()
+        sample.insert_user(20)
+        sample.insert_store(200)
+        sample.insert_products(2000)
+        sample.insert_photo(3000)
+        sample.insert_store_hour()
+        return Response({"success": "Data Created, you can browse know"}, status=status.HTTP_201_CREATED)
