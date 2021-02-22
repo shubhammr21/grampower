@@ -81,13 +81,13 @@ class StoreDetailSerializer(StoreListSerializer):
 
 
 class StoreCreateSerializer(serializers.ModelSerializer):
+    name = serializers.CharField()
+    about = serializers.CharField()
     # cover = serializers.ImageField()
-    # # owner = serializers.RelatedField(write_only=True, queryset=User.objects.all())
-    # open_time = serializers.TimeField(format='%I:%M %p')
-    # close_time = serializers.TimeField(format='%I:%M %p')
+    # owner = serializers.RelatedField(write_only=True, queryset=User.objects.all())
 
     class Meta:
         model = Store
         fields = [
-            'name', 'cover', 'about', 'latitude', 'longitude'
+            'name', 'about'
         ]

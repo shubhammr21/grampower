@@ -36,30 +36,51 @@ from rest_framework.views import APIView
 class HelloWorldView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
+    def post(self, request):
         print(request.data)
         print(request.user)
         return Response(data={"hello": "world"}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def store_create(request):
+    print(request.data)
+    print(request.POST)
+    serializer = StoreCreateSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save(owner=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class StoreCreateView(generics.CreateAPIView):
+#     """
+#     Create a store from here
+#     """
+#     # parser_classes = [MultiPartParser, FormParser]
+#     permission_classes = [IsAuthenticated]
+#     # authentication_classes = (TokenAuthentication,)
+#     serializer_class = StoreCreateSerializer
+
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         self.perform_create(serializer)
+#         headers = self.get_success_headers(serializer.data)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class StoreCreateView(APIView):
     """
     Create a store from here
     """
-    parser_classes = [MultiPartParser, FormParser]
+    # parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
-    authentication_classes = (TokenAuthentication,)
-    # serializer_class = StoreCreateSerializer
-
-    # def create(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_create(serializer)
-    #     headers = self.get_success_headers(serializer.data)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def post(self, request):
-        serializer = StoreDetailSerializer(data=request.data)
+        serializer = StoreCreateSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save(owner=request.user)

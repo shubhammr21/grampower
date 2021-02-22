@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     "django.middleware.common.BrokenLinkEmailsMiddleware",
@@ -314,6 +314,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         # JSONParser | FormParser | MultiPartParser |FileUploadParser
         'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FileUploadParser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # BasicAuthentication | TokenAuthentication | SessionAuthentication
