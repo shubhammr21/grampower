@@ -324,7 +324,7 @@ REST_FRAMEWORK = {
 }
 
 DEV_URL_LIST = ['http://localhost:3000']
-PRODUCTION_URL_LIST = ['https://grampower-test.herokuapp.com']
+PRODUCTION_URL_LIST = ['https://grampower-test.herokuapp.com', 'http://localhost:3000', '127.0.0.1:8000']
 
 CORS_ALLOWED_ORIGINS = DEV_URL_LIST if DEBUG else PRODUCTION_URL_LIST  # list of domains
 # CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT',] #change if required

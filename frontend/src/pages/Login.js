@@ -17,30 +17,30 @@ function Login() {
           localStorage.setItem("token", response.data.key)
           appDispatch({ type: "login" })
           appDispatch({ type: "flashMessage", level: "success", value: "You are success fully logged in" })
-          async function fetchUserData() {
-            try {
-              await Axios.get(`/account/user`, {
-                headers: {
-                  Authorization: `token ${token}`
-                }
-              })
-                .then(response => {
-                  localStorage.setItem("username", response.data.username)
-                  localStorage.setItem("email", response.data.email)
-                  localStorage.setItem("userId", response.data.pk)
-                  // localStorage.setItem("firstName", response.data.firs_name)
-                  // localStorage.setItem("lastName", response.data.last_name)
-                })
-                .catch(err => {
-                  console.log("err.response")
-                  console.log(err.response)
-                })
-              // setState(draft => {draft.profileData = response.data})
-            } catch (e) {
-              console.log("There was a problem.", e)
-            }
-          }
-          fetchUserData()
+          // async function fetchUserData() {
+          //   try {
+          //     await Axios.get(`/account/user`, {
+          //       headers: {
+          //         Authorization: `token ${token}`
+          //       }
+          //     })
+          //       .then(response => {
+          //         localStorage.setItem("username", response.data.username)
+          //         localStorage.setItem("email", response.data.email)
+          //         localStorage.setItem("userId", response.data.pk)
+          //         // localStorage.setItem("firstName", response.data.firs_name)
+          //         // localStorage.setItem("lastName", response.data.last_name)
+          //       })
+          //       .catch(err => {
+          //         console.log("err.response")
+          //         console.log(err.response)
+          //       })
+          //     // setState(draft => {draft.profileData = response.data})
+          //   } catch (e) {
+          //     console.log("There was a problem.", e)
+          //   }
+          // }
+          // fetchUserData()
         })
         .catch(error => {
           console.log(error.response)

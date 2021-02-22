@@ -13,8 +13,8 @@ function Header(props) {
         <nav id="navbar-main" aria-label="Primary navigation" className="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light navbar-transparent navbar-theme-primary">
           <div className="container position-relative">
             <Link to={"/"} className="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4">
-              <img className="navbar-brand-dark" src="./static/frontend/img/brand/dark.svg" alt="Logo light" />
-              <img className="navbar-brand-light" src="./static/frontend/img/brand/dark.svg" alt="Logo dark" />
+              <img className="navbar-brand-dark" src="https://grampower.com/static/images/gp-logo.svg" alt="Logo light" />
+              <img className="navbar-brand-light" src="https://grampower.com/static/images/gp-logo.svg" alt="Logo dark" />
             </Link>
             <div className="navbar-collapse collapse" id="navbar_global">
               <div className="navbar-collapse-header">

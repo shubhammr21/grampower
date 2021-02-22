@@ -2204,67 +2204,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 // djsr/frontend/src/axiosApi.js
 
-const baseURL =
-/* "http://127.0.0.1:8000/" */
-"http://192.168.43.91:8000/"; // const getToken = localStorage.getItem("token")
+const baseURL = "https://grampower-test.herokuapp.com/";
+/* "http://192.168.43.91:8000/" */
 
 const Axios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: baseURL,
   timeout: 5000,
   headers: {
-    // Authorization: Boolean(getToken) ? "token " + localStorage.getItem("token") : null,
     "Content-Type": "application/json",
     accept: "application/json"
   }
-}); // Axios.interceptors.response.use(
-//   response => response,
-//   error => console.log(error)
-// )
-// Axios.interceptors.response.use(
-//   response => response,
-//   error => {
-//     const originalRequest = error.config
-//     // Prevent infinite loops early
-//     if (error.response.status === 401 && originalRequest.url === baseURL + "accounts/token/refresh/") {
-//       window.location.href = "/login/"
-//       return Promise.reject(error)
-//     }
-//     if (error.response.data.code === "token_not_valid" && error.response.status === 401 && error.response.statusText === "Unauthorized") {
-//       const refreshToken = localStorage.getItem("refresh_token")
-//       if (refreshToken) {
-//         const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]))
-//         // exp date in token is expressed in seconds, while now() returns milliseconds:
-//         const now = Math.ceil(Date.now() / 1000)
-//         console.log(tokenParts.exp)
-//         if (tokenParts.exp > now) {
-//           return Axios.post("accounts/token/refresh/", { refresh: refreshToken })
-//             .then(response => {
-//               localStorage.setItem("access_token", response.data.access)
-//               localStorage.setItem("refresh_token", response.data.refresh)
-//               Axios.defaults.headers["Authorization"] = "JWT " + response.data.access
-//               originalRequest.headers["Authorization"] = "JWT " + response.data.access
-//               return Axios(originalRequest)
-//             })
-//             .catch(err => {
-//               console.log(err)
-//             })
-//         } else {
-//           console.log("Refresh token is expired", tokenParts.exp, now)
-//           window.location.href = "/login/"
-//         }
-//       } else {
-//         console.log("Refresh token not available.")
-//         window.location.href = "/login/"
-//       }
-//     }
-//     if (error.response.status === 401 && error.response.statusText === "Unauthorized") {
-//       throw error.response.data.detail
-//     }
-//     // specific error handling done elsewhere
-//     return Promise.reject(error)
-//   }
-// )
-
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Axios);
 
 /***/ }),
@@ -2496,11 +2446,7 @@ function HeaderLoggedIn() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "nav-wrapper position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "nav-link-inner-text text-dark mb-0 mx-3"
-  }, "Welcome ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-    className: "font-weight-bold"
-  }, appState.user.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: handleLogout,
     className: "btn btn-primary text-secondary mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -2809,11 +2755,11 @@ function Header(props) {
     className: "navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "navbar-brand-dark",
-    src: "./static/frontend/img/brand/dark.svg",
+    src: "https://grampower.com/static/images/gp-logo.svg",
     alt: "Logo light"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "navbar-brand-light",
-    src: "./static/frontend/img/brand/dark.svg",
+    src: "https://grampower.com/static/images/gp-logo.svg",
     alt: "Logo dark"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "navbar-collapse collapse",
@@ -3061,29 +3007,30 @@ function Login() {
           type: "flashMessage",
           level: "success",
           value: "You are success fully logged in"
-        });
-
-        async function fetchUserData() {
-          try {
-            await _Axios__WEBPACK_IMPORTED_MODULE_1__.default.get(`/account/user`, {
-              headers: {
-                Authorization: `token ${token}`
-              }
-            }).then(response => {
-              localStorage.setItem("username", response.data.username);
-              localStorage.setItem("email", response.data.email);
-              localStorage.setItem("userId", response.data.pk); // localStorage.setItem("firstName", response.data.firs_name)
-              // localStorage.setItem("lastName", response.data.last_name)
-            }).catch(err => {
-              console.log("err.response");
-              console.log(err.response);
-            }); // setState(draft => {draft.profileData = response.data})
-          } catch (e) {
-            console.log("There was a problem.", e);
-          }
-        }
-
-        fetchUserData();
+        }); // async function fetchUserData() {
+        //   try {
+        //     await Axios.get(`/account/user`, {
+        //       headers: {
+        //         Authorization: `token ${token}`
+        //       }
+        //     })
+        //       .then(response => {
+        //         localStorage.setItem("username", response.data.username)
+        //         localStorage.setItem("email", response.data.email)
+        //         localStorage.setItem("userId", response.data.pk)
+        //         // localStorage.setItem("firstName", response.data.firs_name)
+        //         // localStorage.setItem("lastName", response.data.last_name)
+        //       })
+        //       .catch(err => {
+        //         console.log("err.response")
+        //         console.log(err.response)
+        //       })
+        //     // setState(draft => {draft.profileData = response.data})
+        //   } catch (e) {
+        //     console.log("There was a problem.", e)
+        //   }
+        // }
+        // fetchUserData()
       }).catch(error => {
         console.log(error.response);
       });
