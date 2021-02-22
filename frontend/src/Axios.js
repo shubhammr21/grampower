@@ -2,7 +2,7 @@
 
 import Axios from "axios"
 
-const baseURL = "http://127.0.0.1:8000" || "https://grammpower.herokuapp.com" /* "http://192.168.43.91:8000/" */
+const baseURL = "https://grammpower.herokuapp.com" /* "http://192.168.43.91:8000/" */
 
 Axios.defaults.baseURL = baseURL
 
