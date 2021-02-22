@@ -6,7 +6,7 @@ import Axios from "../Axios"
 
 function CreateStore(props) {
   const [name, setName] = useState("")
-  // const [cover, setCover] = useState(null)
+  const [cover, setCover] = useState(null)
   const [about, setAbout] = useState("")
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
@@ -15,19 +15,15 @@ function CreateStore(props) {
     console.log("clicked")
     const formData = new FormData()
     formData.append("name", name)
-    // formData.append("file", cover)
+    formData.append("file", cover)
     formData.append("about", about)
     e.preventDefault()
     try {
-      await Axios.post(
-        "/store/create/",
-        { name, about },
-        {
-          headers: {
-            Authorization: `token ${appState.user.token}`
-          }
+      await Axios.post("/api/stor/create/", formData, {
+        headers: {
+          Authorization: `token ${appState.user.token}`
         }
-      )
+      })
         .then(response => {
           console.log(response)
           appDispatch({ type: "flashMessage", value: "Cograts, you created a new post." })
@@ -61,12 +57,12 @@ function CreateStore(props) {
           <textarea onChange={e => setAbout(e.target.value)} autoFocus name="about" id="about" className="form-control form-control-lg form-control-title" type="text" placeholder="" autoComplete="off"></textarea>
         </div>
 
-        {/* <div className="custom-file mb-4">
+        <div className="custom-file mb-4">
           <input onChange={e => setCover(e.target.files[0])} type="file" className="custom-file-input" id="customFile" />
           <label className="custom-file-label" htmlFor="customFile">
             Choose cover
           </label>
-        </div> */}
+        </div>
         <button className="btn btn-primary">Save New Store</button>
       </form>
     </Page>

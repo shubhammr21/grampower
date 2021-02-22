@@ -81,13 +81,11 @@ class StoreDetailSerializer(StoreListSerializer):
 
 
 class StoreCreateSerializer(serializers.ModelSerializer):
-    name = serializers.CharField()
-    about = serializers.CharField()
     # cover = serializers.ImageField()
-    # owner = serializers.RelatedField(write_only=True, queryset=User.objects.all())
+    # # owner = serializers.RelatedField(write_only=True, queryset=User.objects.all())
 
     class Meta:
         model = Store
         fields = [
-            'name', 'about'
+            'name', 'cover', 'about'
         ]

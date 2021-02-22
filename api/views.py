@@ -42,50 +42,51 @@ class HelloWorldView(APIView):
         return Response(data={"hello": "world"}, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def store_create(request):
-    print(request.data)
-    print(request.POST)
-    serializer = StoreCreateSerializer(data=request.data)
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def store_create(request):
+#     print(request.data)
+#     print(request.POST)
+#     serializer = StoreCreateSerializer(data=request.data)
 
-    if serializer.is_valid():
+#     if serializer.is_valid():
+#         serializer.save(owner=request.user)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(True, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StoreCreateView(generics.CreateAPIView):
+    """
+    Create a store from here
+    """
+    parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [IsAuthenticated]
+    # authentication_classes = (TokenAuthentication,)
+    serializer_class = StoreCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         serializer.save(owner=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-# class StoreCreateView(generics.CreateAPIView):
+# class StoreCreateView(APIView):
 #     """
 #     Create a store from here
 #     """
 #     # parser_classes = [MultiPartParser, FormParser]
 #     permission_classes = [IsAuthenticated]
-#     # authentication_classes = (TokenAuthentication,)
-#     serializer_class = StoreCreateSerializer
 
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_create(serializer)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+#     def post(self, request):
+#         serializer = StoreCreateSerializer(data=request.data)
 
-
-class StoreCreateView(APIView):
-    """
-    Create a store from here
-    """
-    # parser_classes = [MultiPartParser, FormParser]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        serializer = StoreCreateSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save(owner=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         if serializer.is_valid():
+#             serializer.save(owner=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StoreListView(generics.ListAPIView):
@@ -97,7 +98,8 @@ class StoreListView(generics.ListAPIView):
 
     serializer_class = StoreListSerializer
     pagination_class = StandardResultsPagination
-    filter_backends = (SearchFilter,)
+    filter_backends = (SearchFilter, OrderingFilter)
+    ordering = ('-timestamp',)
     search_fields = ('name', 'owner__first_name',
                      'owner__last_name', 'owner__username')
 
