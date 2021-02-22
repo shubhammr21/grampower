@@ -10,7 +10,9 @@ function CreateStore(props) {
   const [about, setAbout] = useState("")
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
+  const acceptedTypes = ["image/png", "image/jpg", "image/jpeg"]
 
+  console.log(name, cover, about)
   async function handleSubmit(e) {
     console.log("clicked")
     const formData = new FormData()
@@ -21,6 +23,7 @@ function CreateStore(props) {
     try {
       await Axios.post("/api/stor/create/", formData, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `token ${appState.user.token}`
         }
       })
@@ -58,7 +61,7 @@ function CreateStore(props) {
         </div>
 
         <div className="custom-file mb-4">
-          <input onChange={e => setCover(e.target.files[0])} type="file" className="custom-file-input" id="customFile" />
+          <input onChange={e => setCover(e.target.files[0])} type="file" accept={acceptedTypes.toString()} className="custom-file-input" id="customFile" />
           <label className="custom-file-label" htmlFor="customFile">
             Choose cover
           </label>

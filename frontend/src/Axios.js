@@ -1,17 +1,9 @@
 // djsr/frontend/src/axiosApi.js
 
-import axios from "axios"
+import Axios from "axios"
 
 const baseURL = "http://127.0.0.1:8000" || "https://grammpower.herokuapp.com" /* "http://192.168.43.91:8000/" */
 
-const Axios = axios.create({
-  baseURL: baseURL,
-  timeout: 5000,
-
-  headers: {
-    "Content-Type": "application/json",
-    accept: "application/json"
-  }
-})
+Axios.defaults.baseURL = baseURL
 
 export default Axios
