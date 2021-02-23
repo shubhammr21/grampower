@@ -87,5 +87,5 @@ class StoreCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = [
-            'name', 'address', 'about'
+            'name', 'address', 'about', 'cover'
         ]

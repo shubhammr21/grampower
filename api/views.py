@@ -15,7 +15,7 @@ from rest_framework.parsers import (
 )
 from rest_framework.permissions import (
     AllowAny, IsAuthenticated,
-    IsAdminUser
+    IsAdminUser, IsAuthenticatedOrReadOnly
 )
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -26,6 +26,9 @@ from rest_framework.views import APIView
 
 
 class HelloWorldView(APIView):
+    """
+    This test link required authentication.
+    """
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
@@ -49,7 +52,8 @@ class HelloWorldView(APIView):
 
 class StoreCreateView(generics.CreateAPIView):
     """
-    Create a store from here
+    You can Create a store from this link\n
+    Permission (Login Required)
     """
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
@@ -83,7 +87,10 @@ class StoreCreateView(generics.CreateAPIView):
 
 class StoreListView(generics.ListAPIView):
     """
-    Store list view and paginated by 10 items.
+    Store list view and paginated by 10 items.\n
+    You can search store by its name and username.\n
+    You can see it using get method\n
+    Permission (Any)
     """
     queryset = Store.objects.all() \
         .select_related('owner')
@@ -98,15 +105,31 @@ class StoreListView(generics.ListAPIView):
 
 class StoreDetailView(generics.RetrieveUpdateAPIView):
     """
-    Set to slug field to see detail of Store.
+    From this link, you can 'get' or 'put' to
+    see store detail or update store.\n
+    Permission (Any) to get\n
+    Permission (Login Required) to put or update
     """
     lookup_field = 'id'
+    parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Store.objects.all() \
         .select_related('owner')
     serializer_class = StoreDetailSerializer
 
 
 class SampleDataLoadView(APIView):
+    """
+    This link created to insert random
+    bulk data in database\n
+    Counts are given below:
+    sample.insert_user(20)\n
+    sample.insert_store(200)\n
+    sample.insert_products(2000)\n
+    sample.insert_photo(3000)\n
+    sample.insert_store_hour()\n
+    Permission: (Admin Login Required)
+    """
     permission_classes = [IsAdminUser]
 
     def post(self, request):

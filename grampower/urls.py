@@ -30,11 +30,18 @@ if ('drf_yasg' in settings.INSTALLED_APPS):
             description="""
 This is a Development Documentation [Gram Power Technical Test](/).
 
+To interact with api's links, expand the link and click 'Try it out'
+
 The `swagger-ui` view can be found [here](/docs/swagger).
 The `basic-ui` view can be found [here](/docs/api/).
 The `redoc-ui` view can be found [here](/docs/redoc/).
 
+to authenticate: Post /account/login with username and password then you will get an token\n
+goto authorize button and enter 'token YOUR_KEY' in input box. then hit authorize
+
+
 You can log in using the pre-existing `username` user with password `UsernamePassword`.""",  # noqa
+
 contact=openapi.Contact(email="shubhammr21@gmail.com"),
         ),
         public=True,
