@@ -60,7 +60,7 @@ function Header(props) {
                           </span>
                           <div className="ml-4">
                             <span className="text-dark d-block">
-                              Documentation<span className="badge badge-sm badge-secondary ml-2">v1.0</span>
+                              Swagger<span className="badge badge-sm badge-secondary ml-2">v1.0</span>
                             </span>
                             <span className="small">Examples and guides</span>
                           </div>
@@ -71,7 +71,7 @@ function Header(props) {
                           </span>
                           <div className="ml-4">
                             <span className="text-dark d-block">
-                              Documentation<span className="badge badge-sm badge-secondary ml-2">v1.0</span>
+                              Rest Default<span className="badge badge-sm badge-secondary ml-2">v1.0</span>
                             </span>
                             <span className="small">Examples and guides</span>
                           </div>
