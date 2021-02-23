@@ -46,7 +46,7 @@ function Header(props) {
                   )}
                 </li>
 
-                {/* <li className="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <a href="#" className="nav-link" data-toggle="dropdown">
                     <span className="nav-link-inner-text">Support</span>
                     <span className="fas fa-angle-down nav-link-arrow ml-2"></span>
@@ -54,7 +54,7 @@ function Header(props) {
                   <div className="dropdown-menu dropdown-menu-lg">
                     <div className="col-auto px-0" data-dropdown-content>
                       <div className="list-group list-group-flush">
-                        <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                        <a href="/docs/api/" className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
                           <span className="icon icon-sm icon-secondary">
                             <span className="fas fa-file-alt"></span>
                           </span>
@@ -65,23 +65,25 @@ function Header(props) {
                             <span className="small">Examples and guides</span>
                           </div>
                         </a>
-                        <Link to={"/all"} className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                        <a href="/docs/api/" className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
                           <span className="icon icon-sm icon-secondary">
-                            <span className="fas fa-microphone-alt"></span>
+                            <span className="fas fa-file-alt"></span>
                           </span>
                           <div className="ml-4">
-                            <span className="text-dark d-block">Support</span>
-                            <span className="small">Looking for answers? Ask us!</span>
+                            <span className="text-dark d-block">
+                              Documentation<span className="badge badge-sm badge-secondary ml-2">v1.0</span>
+                            </span>
+                            <span className="small">Examples and guides</span>
                           </div>
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </div>
-                </li> */}
+                </li>
               </ul>
             </div>
+            {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
             <div className="d-flex align-items-center">
-              {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
               <button className="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>

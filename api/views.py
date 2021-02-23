@@ -96,7 +96,7 @@ class StoreListView(generics.ListAPIView):
                      'owner__last_name', 'owner__username')
 
 
-class StoreDetailView(generics.RetrieveAPIView):
+class StoreDetailView(generics.RetrieveUpdateAPIView):
     """
     Set to slug field to see detail of Store.
     """

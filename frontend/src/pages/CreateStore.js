@@ -6,7 +6,8 @@ import Axios from "../Axios"
 
 function CreateStore(props) {
   const [name, setName] = useState("")
-  const [cover, setCover] = useState(null)
+  // const [cover, setCover] = useState(null)
+  const [address, setAddress] = useState("")
   const [about, setAbout] = useState("")
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
@@ -16,10 +17,12 @@ function CreateStore(props) {
     console.log("clicked")
     const formData = new FormData()
     formData.append("name", name)
-    formData.append("file", cover)
+    // formData.append("file", cover)
+    formData.append("about", address)
     formData.append("about", about)
     e.preventDefault()
     try {
+      console.log(appState.user.token)
       await Axios.post("/api/create/store/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -28,11 +31,12 @@ function CreateStore(props) {
       })
         .then(response => {
           console.log(response)
-          appDispatch({ type: "flashMessage", value: "Cograts, you created a new post." })
+          appDispatch({ type: "flashMessage", level: "success", value: "Cograts, you created a new post." })
           // props.history.push(`/store/${response.data}`)
         })
         .catch(err => {
           console.log(err)
+          appDispatch({ type: "flashMessage", level: "danger", value: err.response.data.detail })
           console.log(err.response.data)
         })
       //Redirect to new post URL
@@ -53,18 +57,25 @@ function CreateStore(props) {
         </div>
 
         <div className="form-group">
+          <label htmlFor="name" className="text-muted mb-1">
+            <small>Address</small>
+          </label>
+          <input onChange={e => setAddress(e.target.value)} autoFocus name="address" id="address" className="form-control form-control-lg form-control-title" type="text" placeholder="" autoComplete="off" />
+        </div>
+
+        <div className="form-group">
           <label htmlFor="about" className="text-muted mb-1">
             <small>About</small>
           </label>
           <textarea onChange={e => setAbout(e.target.value)} autoFocus name="about" id="about" className="form-control form-control-lg form-control-title" type="text" placeholder="" autoComplete="off"></textarea>
         </div>
 
-        <div className="custom-file mb-4">
+        {/* <div className="custom-file mb-4">
           <input onChange={e => setCover(e.target.files[0])} type="file" accept={acceptedTypes.toString()} className="custom-file-input" id="customFile" />
           <label className="custom-file-label" htmlFor="customFile">
             Choose cover
           </label>
-        </div>
+        </div> */}
         <button className="btn btn-primary">Save New Store</button>
       </form>
     </Page>

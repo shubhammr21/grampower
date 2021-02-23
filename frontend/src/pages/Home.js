@@ -30,9 +30,16 @@ function Home() {
           {stores.map((store, index) => {
             if (stores.length === index + 1) {
               return (
+                // {appState.loggedIn ? (
+                //   <Link to={"/create"} className="nav-link disabled-link">
+                //     <span className="nav-link-inner-text">Create Store</span>
+                //   </Link>
+                // ) : (
+                //   <span className="nav-link-inner-text">Login to create your store</span>
+                // )}
                 <div ref={lastStoreRef} key={store.id} className="col-12 col-md-6 col-lg-4 mb-5">
                   <div className="card bg-primary border-light shadow-soft">
-                    <img src={store.cover} className="card-img-top rounded-top" alt="Themesberg office" />
+                    {store.cover !== null && <img src={store.cover} className="card-img-top rounded-top" alt={store.name} />}
                     <div className="card-body">
                       <span className="h6 icon-tertiary small">
                         <span className="fas fa-user mr-2"></span>
@@ -51,7 +58,7 @@ function Home() {
               return (
                 <div ref={lastStoreRef} key={store.id} className="col-12 col-md-6 col-lg-4 mb-5">
                   <div className="card bg-primary border-light shadow-soft">
-                    <img src={store.cover} className="card-img-top rounded-top" alt="Themesberg office" />
+                    {store.cover !== null && <img src={store.cover} className="card-img-top rounded-top" alt={store.name} />}
                     <div className="card-body">
                       <span className="h6 icon-tertiary small">
                         <span className="fas fa-user mr-2"></span>

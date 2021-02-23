@@ -6,7 +6,7 @@ import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 SECRET_KEY = config('SECRET_KEY', default="v%ds=-6r2*x$9-2$bf*1bv)!7$r7*3%ck+ao71$(j^xhid2d1(")
@@ -174,8 +174,6 @@ if DEBUG:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
 
     LOGGING = {
         "version": 1,
@@ -341,6 +339,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_REPLACE_HTTPS_REFERER = True
 
 # AUTH_USER_MODEL = 'accounts.User'
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 '''
 Django ALlauth settings

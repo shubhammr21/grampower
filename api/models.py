@@ -40,7 +40,7 @@ class Store(models.Model):
     name = models.CharField(max_length=150)
     cover = models.ImageField(upload_to='cover/', blank=True)
     about = models.TextField()
-    #need to add location value for the same
+    address = models.CharField(max_length=250, blank=True)
     latitude = models.CharField(max_length=100, blank=True)
     longitude = models.CharField(max_length=100, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -89,6 +89,7 @@ class Photo(models.Model):
 
     def __str__(self) -> str:
         return self.store.name
+
 
 """ Signals Here """
 
