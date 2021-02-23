@@ -2959,7 +2959,7 @@ function Header(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "list-group list-group-flush"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "/docs/api/",
+    href: "/docs/swagger/",
     className: "list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "icon icon-sm icon-secondary"

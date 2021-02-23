@@ -54,7 +54,7 @@ function Header(props) {
                   <div className="dropdown-menu dropdown-menu-lg">
                     <div className="col-auto px-0" data-dropdown-content>
                       <div className="list-group list-group-flush">
-                        <a href="/docs/api/" className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                        <a href="/docs/swagger/" className="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
                           <span className="icon icon-sm icon-secondary">
                             <span className="fas fa-file-alt"></span>
                           </span>
