@@ -6,7 +6,7 @@ import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 
 SECRET_KEY = config('SECRET_KEY', default="v%ds=-6r2*x$9-2$bf*1bv)!7$r7*3%ck+ao71$(j^xhid2d1(")
