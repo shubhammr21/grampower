@@ -105,6 +105,8 @@ class StoreListView(generics.ListAPIView):
 
 class StoreDetailView(generics.RetrieveUpdateAPIView):
     """
+    To view or update a store, you required to store id first
+    and mention it below in id section
     From this link, you can 'get' or 'put' to
     see store detail or update store.\n
     Permission (Any) to get\n

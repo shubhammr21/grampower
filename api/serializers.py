@@ -69,7 +69,7 @@ class StoreDetailSerializer(StoreListSerializer):
     cover = serializers.ImageField()
     about = serializers.CharField()
     store_hour = StoreHourSerializer(read_only=True, many=True)
-    timestamp = serializers.DateTimeField(format='%b %d, %Y')
+    timestamp = serializers.DateTimeField(format='%b %d, %Y', read_only=True)
 
     class Meta:
         model = Store
