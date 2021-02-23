@@ -2205,17 +2205,16 @@ __webpack_require__.r(__webpack_exports__);
 // djsr/frontend/src/axiosApi.js
  // const host = window.location.protocol + "//" + window.location.host
 // console.log(host)
+// if (window.location.hostname === "127.0.0.1" || "localhost") {
+//   const baseURL = "http://127.0.0.1:8000"
+//   console.log("In localhost")
+//   Axios.defaults.baseURL = baseURL
+// } else {
+// }
 
-if (window.location.hostname === "127.0.0.1" || "localhost") {
-  const baseURL = "http://127.0.0.1:8000";
-  console.log("In localhost");
-  (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = baseURL;
-} else {
-  const baseURL = "https://grammpower.herokuapp.com";
-  console.log("In server");
-  (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = baseURL;
-}
-
+const baseURL = "https://grammpower.herokuapp.com";
+console.log("In server");
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = baseURL;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((axios__WEBPACK_IMPORTED_MODULE_0___default()));
 
 /***/ }),
@@ -2970,7 +2969,7 @@ function Header(props) {
     className: "ml-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "text-dark d-block"
-  }, "Documentation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, "Swagger", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "badge badge-sm badge-secondary ml-2"
   }, "v1.0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "small"
@@ -2985,7 +2984,7 @@ function Header(props) {
     className: "ml-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "text-dark d-block"
-  }, "Documentation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, "Rest Default", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "badge badge-sm badge-secondary ml-2"
   }, "v1.0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "small"
