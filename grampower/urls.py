@@ -17,6 +17,7 @@ urlpatterns = [
     path('account/', include('dj_rest_auth.urls')),
     path('account/registration/', include('dj_rest_auth.registration.urls'))
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if ('drf_yasg' in settings.INSTALLED_APPS):
     from drf_yasg.views import get_schema_view
@@ -50,7 +51,6 @@ contact=openapi.Contact(email="shubhammr21@gmail.com"),
         ), name='schema-redoc'),
     ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
