@@ -9,7 +9,7 @@ import Axios from "axios"
 //   Axios.defaults.baseURL = baseURL
 // } else {
 // }
-const baseURL = "https://grammpower.herokuapp.com"
+const baseURL = "http://127.0.0.1:8000"
 console.log("In server")
 Axios.defaults.baseURL = baseURL
 

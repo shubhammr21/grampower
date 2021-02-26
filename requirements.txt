@@ -33,6 +33,8 @@ django-versatileimagefield==2.0
 djangorestframework==3.12.2
 drf-yasg==1.20.0
 Faker==6.4.1
+geographiclib==1.50
+geopy==2.1.0
 gunicorn==20.0.4
 idna==2.10
 inflection==0.5.1

@@ -17,5 +17,5 @@
   "prettier.printWidth": 9999,
   "prettier.arrowParens": "avoid",
   "prettier.trailingComma": "none",
-  "python.pythonPath": "env/bin/python"
+  "python.pythonPath": "c:\\_venv\\grampower\\Scripts\\python.exe"
 }
